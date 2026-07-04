@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Survey</title>
+  <style>
+    :root {
+      --bg1: #fff7fb;
+      --bg2: #f0fbff;
+      --card: #ffffff;
+      --text: #2f2f48;
+      --yes: #3cbf8a;
+      --no: #ff8b8b;
+      --accent: #a381ff;
+      --shadow: 0 10px 24px rgba(70, 52, 140, 0.14);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background: linear-gradient(130deg, var(--bg1), var(--bg2));
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .wrap {
+      width: min(840px, 100%);
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px dashed #d6ccff;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(2px);
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 0.02em;
+      color: #6a44d5;
+      text-shadow: 2px 2px 0 #eadfff;
+    }
+
+    .question {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 2px solid #efe8ff;
+      box-shadow: 0 6px 14px rgba(136, 122, 200, 0.12);
+    }
+
+    .question-header {
+      font-weight: 700;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .selected-tag {
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: white;
+      white-space: nowrap;
+    }
+
+    .selected-tag.yes {
+      background: var(--yes);
+    }
+
+    .selected-tag.no {
+      background: var(--no);
+    }
+
+    .question-body {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .answer-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #fff;
+      box-shadow: 0 6px 12px rgba(54, 42, 104, 0.2);
+      transform: translateY(0);
+      transition: transform 0.12s ease, filter 0.12s ease;
+    }
+
+    .answer-btn:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .answer-btn:active {
+      transform: translateY(1px);
+    }
+
+    .answer-btn.yes {
+      background: linear-gradient(120deg, #35d79d, #21b67f);
+    }
+
+    .answer-btn.no {
+      background: linear-gradient(120deg, #ff9999, #ff6f6f);
+    }
+
+    .collapsed .question-body {
+      display: none;
+    }
+
+    .result {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 2px solid #e9dcff;
+      box-shadow: var(--shadow);
+      display: none;
+      text-align: center;
+    }
+
+    .result.show {
+      display: block;
+      animation: pop 0.3s ease-out;
+    }
+
+    .result p {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #5e37c8;
+    }
+
+    .result img {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 16px;
+      border: 4px solid #f0e8ff;
+      box-shadow: 0 10px 18px rgba(100, 76, 180, 0.18);
+    }
+
+    .controls {
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .reset-btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 12px 22px;
+      background: linear-gradient(120deg, #a381ff, #7dcbff);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      box-shadow: 0 8px 14px rgba(79, 65, 150, 0.22);
+    }
+
+    @keyframes pop {
+      from {
+        opacity: 0;
+        transform: scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Placeholder title</h1>
+
+    <section class="question" data-question="0">
+      <div class="question-header">
+        <span>Placeholder question 1 text</span>
+        <span class="selected-tag" hidden></span>
+      </div>
+      <div class="question-body">
+        <button class="answer-btn yes" type="button" data-answer="yes">Yes</button>
+        <button class="answer-btn no" type="button" data-answer="no">No</button>
+      </div>
+    </section>
+
+    <section class="question" data-question="1">
+      <div class="question-header">
+        <span>Placeholder question 2 text</span>
+        <span class="selected-tag" hidden></span>
+      </div>
+      <div class="question-body">
+        <button class="answer-btn yes" type="button" data-answer="yes">Yes</button>
+        <button class="answer-btn no" type="button" data-answer="no">No</button>
+      </div>
+    </section>
+
+    <section class="question" data-question="2">
+      <div class="question-header">
+        <span>Placeholder question 3 text</span>
+        <span class="selected-tag" hidden></span>
+      </div>
+      <div class="question-body">
+        <button class="answer-btn yes" type="button" data-answer="yes">Yes</button>
+        <button class="answer-btn no" type="button" data-answer="no">No</button>
+      </div>
+    </section>
+
+    <section id="result" class="result" aria-live="polite">
+      <p id="result-text"></p>
+      <img
+        id="result-image"
+        src="https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg"
+        alt="Survey result image"
+      />
+    </section>
+
+    <div class="controls">
+      <button id="reset-survey" class="reset-btn" type="button">Clear answers / Restart survey</button>
+    </div>
+  </main>
+
+  <script>
+    const resultMap = {
+      0: "Placeholder 4",
+      1: "Placeholder 1",
+      2: "Placeholder 2",
+      3: "Placeholder 3"
+    };
+
+    const imageMap = {
+      0: "https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg",
+      1: "https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg",
+      2: "https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg",
+      3: "https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg"
+    };
+
+    const answers = [null, null, null];
+    const questionEls = document.querySelectorAll(".question");
+    const resultEl = document.getElementById("result");
+    const resultTextEl = document.getElementById("result-text");
+    const resultImageEl = document.getElementById("result-image");
+    const resetButton = document.getElementById("reset-survey");
+
+    function renderResultIfComplete() {
+      const isComplete = answers.every((value) => value !== null);
+      if (!isComplete) {
+        resultEl.classList.remove("show");
+        return;
+      }
+
+      const yesCount = answers.filter((value) => value === "yes").length;
+      resultTextEl.textContent = resultMap[yesCount];
+      resultImageEl.src = imageMap[yesCount];
+      resultEl.classList.add("show");
+    }
+
+    function selectAnswer(questionIndex, answer) {
+      if (answers[questionIndex] !== null) {
+        return;
+      }
+
+      answers[questionIndex] = answer;
+      const questionEl = document.querySelector(`.question[data-question="${questionIndex}"]`);
+      const tagEl = questionEl.querySelector(".selected-tag");
+
+      questionEl.classList.add("collapsed");
+      tagEl.hidden = false;
+      tagEl.textContent = `Selected: ${answer.toUpperCase()}`;
+      tagEl.classList.toggle("yes", answer === "yes");
+      tagEl.classList.toggle("no", answer === "no");
+
+      renderResultIfComplete();
+    }
+
+    questionEls.forEach((questionEl) => {
+      questionEl.addEventListener("click", (event) => {
+        const answerButton = event.target.closest(".answer-btn");
+        if (!answerButton) {
+          return;
+        }
+
+        const questionIndex = Number(questionEl.dataset.question);
+        const answer = answerButton.dataset.answer;
+        selectAnswer(questionIndex, answer);
+      });
+    });
+
+    resetButton.addEventListener("click", () => {
+      for (let i = 0; i < answers.length; i += 1) {
+        answers[i] = null;
+      }
+
+      questionEls.forEach((questionEl) => {
+        questionEl.classList.remove("collapsed");
+        const tagEl = questionEl.querySelector(".selected-tag");
+        tagEl.hidden = true;
+        tagEl.textContent = "";
+        tagEl.classList.remove("yes", "no");
+      });
+
+      resultTextEl.textContent = "";
+      resultImageEl.src = imageMap[0];
+      resultEl.classList.remove("show");
+    });
+  </script>
+</body>
+</html>
